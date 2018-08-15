@@ -85,7 +85,7 @@ $(function() {
 
         // Feed is loaded by loadFeed
         it('Feed is loaded by loadFeed', function(done) {
-            expect($('.entry')).toBeDefined();
+            expect($('.feed .entry')).toBeDefined();
             done();
         });
 
@@ -95,6 +95,7 @@ $(function() {
 
     /* Test suite named "New Feed Selection" */
      describe('New Feed Selection', function() {
+        // variables to store the feeds value.
         var feedOne, feedTwo;
          /* Test to ensure when a new feed is loaded
          * by the loadFeed function, the content actually changes.
@@ -104,12 +105,13 @@ $(function() {
             $('.feed').empty();
             loadFeed(0, function () {
                 feedOne = $('.feed').find(allFeeds.url)
-                done();
+
+                loadFeed(1, function () {
+                    feedTwo = $('.feed').find(allFeeds.url)
+                    done();
+                });
             });
-             loadFeed(1, function () {
-                feedOne = $('.feed').find(allFeeds.url)
-                done();
-            });
+             
         });
 
         // New feed is loaded, so the content gets changed.
